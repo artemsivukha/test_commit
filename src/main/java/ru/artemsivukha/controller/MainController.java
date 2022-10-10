@@ -74,19 +74,32 @@ public class MainController {
 //        storage = newStorage;
 //    }
 
+//        if (storage.containsKey(id)) {
+//            for (int i = 0; i < storage.size(); i++) {
+//                if (i == id) {
+//                    storage.remove(id);
+//                }
+//            }
+//            for (int j = id; j < storage.size(); j++) {
+//                    String data = storage.get(j + 1);
+//                    storage.put(j, data);
+//                    storage.remove(j + 1);
+//            }
+//        } else {
+//            throw new RuntimeException();
+//        }
+
         if (storage.containsKey(id)) {
             for (int i = 0; i < storage.size(); i++) {
                 if (i == id) {
                     storage.remove(id);
+                    String data = storage.get(i + 1);
+                    storage.put(i, data);
+                    storage.remove(i + 1);
                 }
             }
-            for (int j = id; j < storage.size(); j++) {
-                    String data = storage.get(j + 1);
-                    storage.put(j, data);
-                    storage.remove(j + 1);
-            }
         } else {
-            throw new RuntimeException();
+              throw new RuntimeException();
+          }
         }
     }
-}
