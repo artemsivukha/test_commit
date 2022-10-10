@@ -25,7 +25,7 @@ public class MainController {
         for (int i = 0; i < storage.size(); ++i) {
             stringBuilder.append("{ ")
                     .append("id: " + i + ",\n")
-                    .append("name: "+ storage.get(i) + "\n")
+                    .append("name: " + storage.get(i) + "\n")
                     .append(" }\n");
         }
         stringBuilder.append(" ]");
@@ -38,7 +38,7 @@ public class MainController {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("{ ")
                 .append("id: " + id + ",\n")
-                .append("name: "+ storage.get(id) + "\n")
+                .append("name: " + storage.get(id) + "\n")
                 .append(" }\n");
         return stringBuilder.toString();
     }
@@ -59,7 +59,7 @@ public class MainController {
     }
 
     @DeleteMapping("{id}")
-        public void delete(@PathVariable int id) {
+    public void delete(@PathVariable int id) {
 
 //        Map<Integer, String> newStorage = new HashMap<>();
 //        for (int i = 0; i < storage.size(); i++) {
@@ -74,28 +74,19 @@ public class MainController {
 //        storage = newStorage;
 //    }
 
-//        storage.keySet().removeIf(x -> x == id);
-//        System.out.println(storage);
-
-
-        for (int i = 0; i < storage.size(); i++) {
-            if (i == id) {
-               // if (storage.containsKey(id)) {
-
-                storage.remove(id);
-                id = id + 1;
-
-            for (int j = i; j < storage.size(); j++) {
-
-
-                        System.out.println(storage);
+        if (storage.containsKey(id)) {
+            for (int i = 0; i < storage.size(); i++) {
+                if (i == id) {
+                    storage.remove(id);
                 }
             }
-         //       } else {
-           //     throw new RuntimeException();
-       //   }
+            for (int j = id; j < storage.size(); j++) {
+                    String data = storage.get(j + 1);
+                    storage.put(j, data);
+                    storage.remove(j + 1);
             }
+        } else {
+            throw new RuntimeException();
         }
-      }
-   // }
-
+    }
+}
